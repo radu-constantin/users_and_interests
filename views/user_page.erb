@@ -4,11 +4,20 @@
 </head>
 	<body>
 			<div id='user'>
-				<h3>
-				<ul id=user_list>
-						<li> <a href="#"> <%= "#{@name}, #{@email}, #{@interests.join(", ")}" %></a> </li>
+				<h3> User: <%= @name %> </h3>
+				<ul id='user_details'>
+					<li> Email: <%= @email %> </li>
+					<li> Interests: <%= @interests.join(", ") %> </li>
 				</ul>
-			</div
+			</div>
+			
+		<div id='user_links'>
+			<% @other_users.each do |user| %>
+			<p><a href='/users/<%=user%>'><%= user %></a></p>
+			<% end %>
+			
+			
+		</div>
 	</body>
 
 </html>

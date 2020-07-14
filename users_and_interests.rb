@@ -32,5 +32,6 @@ get "/users/:name" do
 	@name = params[:name]
 	@email = @users[@name.to_sym][:email]
 	@interests = @users[@name.to_sym][:interests]
+	@other_users = @users.keys.map(&:to_s) - [@name]
 	erb :user_page
 end
