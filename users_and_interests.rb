@@ -22,16 +22,26 @@ before do
 	@users = YAML.load_file("public/users.yaml")
 end
 
+helpers do
+	def interest_counter
+		counter = 0
+		@users.keys.each do |user|
+			counter += @users[user][:interests].count
+		end
+		counter
+	end
+end
+
 get "/" do
 	erb :home
 end
 
 get "/users/:name" do
 	redirect not_found unless @users.include?(params[:name].to_sym)
-
 	@name = params[:name]
 	@email = @users[@name.to_sym][:email]
 	@interests = @users[@name.to_sym][:interests]
 	@other_users = @users.keys.map(&:to_s) - [@name]
+	
 	erb :user_page
 end
